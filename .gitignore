@@ -5,5 +5,16 @@ coverage/
 *.log
 .env
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Go
+*.test
+golang/vendor/
+
 # Interviewer-only materials (solutions, answers, guides)
 interviewer/
