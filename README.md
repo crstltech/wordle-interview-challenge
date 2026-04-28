@@ -8,6 +8,8 @@ This is a two-phase challenge designed to assess debugging, system design, and p
 
 **Important:** You won't finish everything in Phase 2 — we want to see how you prioritize and communicate tradeoffs.
 
+**Unfamiliar with Wordle?** [Play the actual game here](https://www.nytimes.com/games/wordle/index.html)
+
 ## Setup
 
 ```bash
