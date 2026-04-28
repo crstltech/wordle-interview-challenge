@@ -16,5 +16,10 @@ __pycache__/
 *.test
 golang/vendor/
 
+# Java
+target/
+*.class
+*.jar
+
 # Interviewer-only materials (solutions, answers, guides)
 interviewer/

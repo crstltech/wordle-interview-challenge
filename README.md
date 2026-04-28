@@ -13,6 +13,7 @@ A two-phase debugging and design challenge built around a Wordle service. Choose
 | [TypeScript](./typescript/) | `typescript/` | Node.js ≥ 20 | `npm test` |
 | [Go](./golang/) | `golang/` | Go ≥ 1.21 | `go test ./...` |
 | [Python](./python/) | `python/` | Python ≥ 3.11 | `pytest` |
+| [Java](./java/) | `java/` | Java ≥ 21, Maven ≥ 3.8 | `mvn test` |
 
 Each folder contains the same challenge with language-idiomatic code. See the folder README for setup and test commands.
 
