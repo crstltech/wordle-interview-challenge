@@ -45,7 +45,6 @@ Fix the bugs in `src/WordleService.ts`. Your job:
 ## Hints
 
 - The demo script (`npm run demo`) shows the bugs visually
-- Some bugs are in the game logic, others in validation and concurrency
 - Read the test descriptions carefully — they reveal expected behavior
 
 ## Wordle Rules Reference
@@ -54,8 +53,6 @@ Standard Wordle letter coloring:
 - **Green (0)**: Correct letter in correct position
 - **Yellow (1)**: Letter exists in answer but wrong position
 - **Grey (2)**: Letter not in answer (or already accounted for)
-
-For duplicate letters: Process exact matches (green) first, then wrong-position matches (yellow), tracking which answer letters are "used up."
 
 ---
 

@@ -119,7 +119,6 @@ class TestDuplicateLetters:
 
 class TestValidation:
     async def test_validation_wrong_length(self):
-        """FAILS until Bug 2 is fixed: service must validate guess length."""
         service = WordleService()
         game_id = service.start_game(GameOptions(answer="REACT"))
 
@@ -127,7 +126,6 @@ class TestValidation:
             await service.submit_guess(game_id, "HI")
 
     async def test_validation_not_in_dictionary(self):
-        """FAILS until Bug 2 is fixed: service must validate against dictionary."""
         service = WordleService()
         game_id = service.start_game(GameOptions(answer="REACT"))
 
@@ -144,11 +142,6 @@ class TestValidation:
 
 class TestConcurrency:
     async def test_concurrency_max_guesses(self):
-        """
-        FAILS until Bug 3 is fixed: without asyncio.Lock, concurrent submit_guess
-        calls all pass the won/lost check, then all await, then all update state,
-        exceeding max_guesses.
-        """
         service = WordleService()
         game_id = service.start_game(GameOptions(answer="REACT", max_guesses=2))
 

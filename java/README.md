@@ -44,7 +44,6 @@ Fix the bugs in `src/main/java/wordle/WordleService.java`. Your job:
 ## Hints
 
 - The demo (`mvn exec:java`) shows the bugs visually
-- Some bugs are in game logic, others in validation and concurrency
 - Read the test descriptions carefully — they reveal expected behaviour
 
 ## Wordle Rules Reference
@@ -53,8 +52,6 @@ Standard Wordle letter colouring:
 - **Green (GREEN)**: Correct letter in correct position
 - **Yellow (YELLOW)**: Letter exists in answer but wrong position
 - **Grey (GREY)**: Letter not in answer (or already accounted for)
-
-For duplicate letters: process exact matches (GREEN) first, then wrong-position matches (YELLOW), tracking which answer letters are "used up."
 
 ---
 

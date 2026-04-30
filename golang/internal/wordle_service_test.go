@@ -94,9 +94,6 @@ func TestSubmitGuess_InvalidGameID(t *testing.T) {
 //	P(2): PAPER[2] = P → GREEN
 //	L(3): L not in PAPER → GREY
 //	E(4): E in PAPER → YELLOW
-//
-// Note: the buggy single-pass algorithm happens to produce the same result here,
-// so this test passes even before fixing Bug 1.
 func TestDuplicateLetters_AppleVsPaper(t *testing.T) {
 	svc := newService()
 	gameID := svc.StartGame(internal.GameOptions{Answer: "PAPER"})
@@ -115,9 +112,6 @@ func TestDuplicateLetters_AppleVsPaper(t *testing.T) {
 
 // TestDuplicateLetters_CreepVsSheep: answer=SHEEP, guess=CREEP
 // Expected: [GREY, GREY, GREEN, GREEN, GREEN]
-//
-// Note: the buggy single-pass algorithm happens to produce the same result here
-// because all mismatched letters (C, R) are simply absent from SHEEP.
 func TestDuplicateLetters_CreepVsSheep(t *testing.T) {
 	svc := newService()
 	gameID := svc.StartGame(internal.GameOptions{Answer: "SHEEP"})
@@ -137,9 +131,7 @@ func TestDuplicateLetters_CreepVsSheep(t *testing.T) {
 // TestDuplicateLetters_ExcessDuplicates: answer=CRANE, guess=ABATE
 // Expected: [GREY, GREY, GREEN, GREY, GREEN]
 //
-// The buggy single-pass algorithm marks ABATE[0]='A' as YELLOW because it just
-// checks ContainsRune(CRANE,'A') without accounting for the GREEN at pos 2.
-// This is the key test that catches Bug 1: expected GREY but buggy gives YELLOW.
+// CRANE has one A; it is matched GREEN at pos 2, so ABATE[0]='A' should be GREY.
 func TestDuplicateLetters_ExcessDuplicates(t *testing.T) {
 	svc := newService()
 	gameID := svc.StartGame(internal.GameOptions{Answer: "CRANE"})
@@ -161,7 +153,6 @@ func TestDuplicateLetters_ExcessDuplicates(t *testing.T) {
 // ---------------------------------------------------------------------------
 
 // TestValidation_WrongLength: a guess shorter than 5 letters should return ValidationError.
-// FAILS until Bug 2 is fixed.
 func TestValidation_WrongLength(t *testing.T) {
 	svc := newService()
 	gameID := svc.StartGame(internal.GameOptions{Answer: "REACT"})
@@ -173,7 +164,6 @@ func TestValidation_WrongLength(t *testing.T) {
 }
 
 // TestValidation_NotInDictionary: a 5-letter word not in the dictionary should return ValidationError.
-// FAILS until Bug 2 is fixed.
 func TestValidation_NotInDictionary(t *testing.T) {
 	svc := newService()
 	gameID := svc.StartGame(internal.GameOptions{Answer: "REACT"})
@@ -199,7 +189,6 @@ func TestValidation_ValidWord(t *testing.T) {
 
 // TestConcurrency_MaxGuesses: 5 goroutines submit guesses to a maxGuesses=2 game.
 // At most 2 should succeed; game.Guesses length must not exceed 2.
-// FAILS until Bug 3 (race condition) is fixed.
 func TestConcurrency_MaxGuesses(t *testing.T) {
 	svc := newService()
 	gameID := svc.StartGame(internal.GameOptions{Answer: "REACT", MaxGuesses: 2})

@@ -64,7 +64,6 @@ export class WordleService {
 
     const codes = this.calculateLetterCodes(normalizedGuess, game.answer);
 
-    // Update game state (but another request might have already updated it!)
     game.guesses.push(normalizedGuess);
     
     const won = normalizedGuess === game.answer;

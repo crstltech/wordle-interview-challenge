@@ -32,7 +32,7 @@ public class WordleSolver {
         // TODO: Implement your solver logic here
         //
         // Suggested approach:
-        // 1. If no previous guesses, return a good starting word (e.g. "CRANE")
+        // 1. If no previous guesses, return a good starting word
         //
         // 2. Filter possibleWords based on previous results:
         //    - GREEN: letter must be at that position

@@ -46,7 +46,6 @@ Fix the bugs in `internal/wordle_service.go`. Your job:
 ## Hints
 
 - The demo script (`go run ./cmd/demo/`) shows the bugs visually
-- Some bugs are in the game logic, others in validation and concurrency
 - Read the test descriptions carefully — they reveal expected behaviour
 
 ## Wordle Rules Reference
@@ -55,8 +54,6 @@ Standard Wordle letter coloring:
 - **Green (0)**: Correct letter in correct position
 - **Yellow (1)**: Letter exists in answer but wrong position
 - **Grey (2)**: Letter not in answer (or already accounted for)
-
-For duplicate letters: Process exact matches (green) first, then wrong-position matches (yellow), tracking which answer letters are "used up."
 
 ---
 
@@ -211,22 +208,11 @@ golang/
 
 ## Tips
 
-### General
 - **Talk through your thinking** — we want to understand your approach
 - **Ask clarifying questions** — requirements may be intentionally ambiguous
 - **Prioritise ruthlessly** — you won't finish everything in Phase 2
 - **Focus on correctness over optimisation** — working code beats fast broken code
-
-### Phase 1
-- Use the test output to guide your debugging (`go test ./... -v`)
-- The demo script visualises the bugs clearly: `go run ./cmd/demo/`
-- Don't over-engineer the fixes — simple solutions are fine
-
-### Phase 2
-- **Pick ONE track** and do it well
-- Document your tradeoffs and decisions
-- Production code needs error handling, logging, and tests
-- If you have time, you can switch tracks or combine approaches
+- **Pick ONE track** in Phase 2 and do it well
 
 ### What Success Looks Like
 - Phase 1 done in 15 minutes with all tests passing

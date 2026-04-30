@@ -42,8 +42,7 @@ export class WordleSolver {
     //
     // Suggested approach:
     // 1. If no previous guesses, return a good starting word
-    //    - Common starting words: CRANE, SALET, TRACE, ADIEU
-    //    - Or calculate the word with highest expected information gain
+    //    - Calculate the word with highest expected information gain
     //
     // 2. Filter possible words based on previous results
     //    - Narrow down the word list using the constraints from previous guesses
@@ -136,11 +135,10 @@ export class WordleSolver {
   private getStartingWord(): string {
     // TODO: Return a good starting word
     // Options:
-    // 1. Hardcode a known good starter (e.g., "CRANE")
-    // 2. Calculate based on letter frequency in word list
-    // 3. Calculate word with maximum entropy
+    // 1. Calculate based on letter frequency in word list
+    // 2. Calculate word with maximum entropy
 
-    return 'CRANE'; // Placeholder
+    throw new Error('Not implemented');
   }
 
   /**

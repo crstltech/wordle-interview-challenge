@@ -25,12 +25,7 @@ Each folder contains the same challenge with language-idiomatic code. See the fo
 
 ### Phase 1 — Debug & Fix (15 min)
 
-Fix the bugs in the Wordle service. There are three:
-- A duplicate-letter scoring algorithm bug
-- Missing input validation
-- A concurrency race condition
-
-Run the tests, diagnose the failures, fix the bugs.
+Fix the bugs in the Wordle service. Run the tests, diagnose the failures, fix the bugs.
 
 ### Phase 2 — Production Features (30 min)
 
@@ -68,5 +63,3 @@ You won't finish everything. We want to see how you prioritize and communicate t
 - **Green**: Correct letter, correct position
 - **Yellow**: Letter exists in answer but wrong position
 - **Grey**: Letter not in answer (or already accounted for)
-
-For duplicate letters: process exact matches (green) first, then wrong-position matches (yellow), tracking which answer letters are "used up."

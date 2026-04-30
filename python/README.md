@@ -48,7 +48,6 @@ Fix the bugs in `src/wordle_service.py`. Your job:
 ## Hints
 
 - The demo script (`python demo.py`) shows the bugs visually
-- Some bugs are in the game logic, others in validation and concurrency
 - Read the test descriptions carefully — they reveal expected behavior
 
 ## Wordle Rules Reference
@@ -57,8 +56,6 @@ Standard Wordle letter coloring:
 - **Green (0)**: Correct letter in correct position
 - **Yellow (1)**: Letter exists in answer but wrong position
 - **Grey (2)**: Letter not in answer (or already accounted for)
-
-For duplicate letters: Process exact matches (green) first, then wrong-position matches (yellow), tracking which answer letters are "used up."
 
 ---
 
@@ -218,96 +215,17 @@ The `DictionaryService` provides:
 
 ## Tips
 
-### General
 - **Talk through your thinking** — we want to understand your approach
 - **Ask clarifying questions** — requirements may be intentionally ambiguous
 - **Prioritize ruthlessly** — you won't finish everything in Phase 2
 - **Focus on correctness over optimization** — working code beats fast broken code
-
-### Phase 1
-- Use the test output to guide your debugging
-- The demo script visualizes the bugs clearly
-- Don't over-engineer the fixes — simple solutions are fine
-
-### Phase 2
-- **Pick ONE track** and do it well
-- Document your tradeoffs and decisions
-- Production code needs error handling, logging, and tests
-- If you have time, you can switch tracks or combine approaches
+- **Pick ONE track** in Phase 2 and do it well
 
 ### What Success Looks Like
 - Phase 1 done in 15 minutes with all tests passing
 - Clear explanation of the bugs and fixes
 - Phase 2 has 1-2 polished features with tests and documentation
 - Thoughtful discussion of tradeoffs and alternative approaches
-
----
-
-## Example Scenarios (Phase 2)
-
-### If You Choose Track A (Solver):
-```python
-# Example usage
-dictionary = DictionaryService()
-solver = WordleSolver(dictionary)
-
-guess1 = solver.get_next_guess([])  # -> "CRANE" (good starter)
-
-result1 = [LetterCode.GREY, LetterCode.YELLOW, LetterCode.YELLOW, LetterCode.GREY, LetterCode.GREY]
-# C=grey, R=yellow, A=yellow, N=grey, E=grey
-
-guess2 = solver.get_next_guess([PreviousGuess(guess="CRANE", result=result1)])
-# -> "ROAST" or similar
-
-# Continue until solved...
-```
-
-### If You Choose Track B (Scale):
-```markdown
-# DESIGN.md excerpt
-
-## Database Choice: PostgreSQL
-
-**Decision:** Use PostgreSQL with JSONB for game state
-
-**Rationale:**
-- Need ACID guarantees for concurrent game updates
-- JSONB allows flexible schema for game state
-- Excellent indexing for leaderboard queries
-- Battle-tested at scale
-
-**Schema:**
-CREATE TABLE games (
-  id UUID PRIMARY KEY,
-  user_id UUID NOT NULL,
-  answer TEXT NOT NULL,
-  state JSONB NOT NULL,
-  created_at TIMESTAMP DEFAULT NOW(),
-  completed_at TIMESTAMP
-);
-CREATE INDEX idx_user_active_games ON games(user_id) WHERE completed_at IS NULL;
-
-**Caching Strategy:**
-- Redis for active game state (TTL 1 hour)
-- Read-through cache pattern...
-```
-
-### If You Choose Track C (Features):
-```python
-# Hard mode example
-game_id = service.start_game(GameOptions(answer="CRANE", hard_mode=True))
-
-await service.submit_guess(game_id, "APPLE")
-# Result: A=yellow, P=grey, P=grey, L=grey, E=yellow
-
-# Next guess MUST include A and E (the yellows)
-await service.submit_guess(game_id, "STALE")
-# Valid (has A and E)
-
-await service.submit_guess(game_id, "STORM")
-# Invalid in hard mode — missing A and E
-# raises ValidationError("Hard mode: must use revealed hints")
-```
 
 ---
 

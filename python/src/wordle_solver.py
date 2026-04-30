@@ -40,8 +40,7 @@ class WordleSolver:
 
         Suggested approach:
         1. If no previous guesses, return a good starting word
-           - Common starting words: CRANE, SALET, TRACE, ADIEU
-           - Or calculate the word with highest expected information gain
+           - Calculate the word with highest expected information gain
 
         2. Filter possible words based on previous results
            - Narrow down the word list using the constraints from previous guesses
@@ -106,7 +105,6 @@ class WordleSolver:
         Simulate the result you'd get if you guessed 'guess' and the answer was 'answer'.
 
         TODO: Implement Wordle coloring logic.
-        This should match the CORRECT logic (not the buggy version in WordleService).
         """
         ...
 
@@ -115,7 +113,7 @@ class WordleSolver:
         Get a good starting word.
         Pre-computed or calculated based on letter frequency.
         """
-        return "CRANE"
+        raise NotImplementedError("Implement your starting word selection here")
 
     def solve(self, answer: str, max_guesses: int = 6) -> Optional[list[str]]:
         """

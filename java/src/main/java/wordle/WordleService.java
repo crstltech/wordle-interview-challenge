@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public class WordleService {
 
-    // BUG 3: HashMap is not thread-safe for concurrent access
     private final Map<String, GameState> games = new HashMap<>();
     private final DictionaryService dictionary;
 
@@ -59,13 +58,9 @@ public class WordleService {
 
         String normalizedGuess = guess.toUpperCase();
 
-        // BUG 2: No validation — missing length check and dictionary lookup
-
-        // Simulate async work (e.g., logging, external call) — creates a race window
+        // Simulate async work (e.g., logging, external call)
         simulateAsyncWork();
 
-        // BUG 3: State update after sleep with no lock held.
-        // Another thread may have already updated game state.
         List<LetterCode> codes = calculateLetterCodes(normalizedGuess, game.getAnswer());
         game.addGuess(normalizedGuess);
 
@@ -103,8 +98,6 @@ public class WordleService {
 
             if (guessChar == answerChar) {
                 codes.add(LetterCode.GREEN);
-            // BUG 1: Naive single-pass — does not track which answer letters are already
-            // accounted for. Excess duplicate letters should be GREY, not YELLOW.
             } else if (answer.indexOf(guessChar) >= 0) {
                 codes.add(LetterCode.YELLOW);
             } else {
