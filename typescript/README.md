@@ -10,6 +10,27 @@ This is a two-phase challenge designed to assess debugging, system design, and p
 
 **Important:** You won't finish everything in Phase 2 — we want to see how you prioritize and communicate tradeoffs.
 
+## Installation
+
+**Install Node.js 20** (via [nvm](https://github.com/nvm-sh/nvm), recommended):
+
+```bash
+# macOS / Linux
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+# restart your shell, then:
+nvm install 20
+nvm use 20
+```
+
+Or download directly from [nodejs.org](https://nodejs.org/).
+
+Verify:
+
+```bash
+node --version   # should print v20.x.x
+npm --version
+```
+
 ## Setup
 
 > Run all commands from the `typescript/` directory.

@@ -10,6 +10,28 @@ This is a two-phase challenge designed to assess debugging, system design, and p
 
 **Important:** You won't finish everything in Phase 2 — we want to see how you prioritize and communicate tradeoffs.
 
+## Installation
+
+**Install Go 1.21+:**
+
+```bash
+# macOS (Homebrew)
+brew install go
+
+# Linux
+wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
+export PATH=$PATH:/usr/local/go/bin   # add to ~/.bashrc or ~/.zshrc
+```
+
+Or download from [go.dev/dl](https://go.dev/dl/).
+
+Verify:
+
+```bash
+go version   # should print go1.21.x or later
+```
+
 ## Setup
 
 ```bash

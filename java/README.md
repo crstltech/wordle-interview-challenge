@@ -10,6 +10,34 @@ This is a two-phase challenge designed to assess debugging, system design, and p
 
 **Important:** You won't finish everything in Phase 2 — we want to see how you prioritize and communicate tradeoffs.
 
+## Installation
+
+**Install Java 21+ and Maven 3.8+** (via [SDKMAN](https://sdkman.io/), recommended):
+
+```bash
+# macOS / Linux
+curl -s "https://get.sdkman.io" | bash
+# restart your shell, then:
+sdk install java 21.0.3-tem
+sdk install maven 3.9.6
+```
+
+Or via Homebrew (macOS):
+
+```bash
+brew install openjdk@21 maven
+# follow the brew caveats to add java to your PATH
+```
+
+Or download from [adoptium.net](https://adoptium.net/) (Java) and [maven.apache.org](https://maven.apache.org/download.cgi) (Maven).
+
+Verify:
+
+```bash
+java --version   # should print openjdk 21.x.x or later
+mvn --version    # should print Apache Maven 3.8.x or later
+```
+
 ## Setup
 
 > Run all commands from the `java/` directory. Requires Java 21+ and Maven 3.8+.

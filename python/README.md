@@ -10,14 +10,39 @@ This is a two-phase challenge designed to assess debugging, system design, and p
 
 **Unfamiliar with Wordle?** [Play the actual game here](https://www.nytimes.com/games/wordle/index.html)
 
+## Installation
+
+**Install Python 3.11+** (via [pyenv](https://github.com/pyenv/pyenv), recommended):
+
+```bash
+# macOS (Homebrew)
+brew install pyenv
+pyenv install 3.11.0
+pyenv local 3.11.0   # sets version for this directory
+
+# Linux
+curl https://pyenv.run | bash
+# restart your shell, then:
+pyenv install 3.11.0
+pyenv local 3.11.0
+```
+
+Or download directly from [python.org](https://www.python.org/downloads/).
+
+Verify:
+
+```bash
+python --version   # should print Python 3.11.x or later
+```
+
 ## Setup
 
 All commands should be run from the `python/` directory.
 
-Requires Python 3.11+
-
 ```bash
 cd python
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
 pytest                               # Run all tests
 pytest tests/test_wordle_service.py  # Run Phase 1 tests
