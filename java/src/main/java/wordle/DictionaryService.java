@@ -15,7 +15,7 @@ import java.util.Set;
 public class DictionaryService {
 
     private static final Set<String> DICTIONARY = Set.of(
-        "APPLE", "ABOUT", "ABOVE", "ABUSE", "ACTOR",
+        "ABATE", "APPLE", "ABOUT", "ABOVE", "ABUSE", "ACTOR",
         "ACUTE", "ADMIT", "ADOPT", "ADULT", "AGENT",
         "AGREE", "AHEAD", "ALARM", "ALBUM", "ALERT",
         "ALIKE", "ALIVE", "ALLOW", "ALONE", "ALONG",

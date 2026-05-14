@@ -2,7 +2,7 @@ import asyncio
 import random
 
 WORDS: frozenset[str] = frozenset([
-    "APPLE", "ABOUT", "ABOVE", "ABUSE", "ACTOR", "ACUTE", "ADMIT", "ADOPT", "ADULT", "AGENT",
+    "ABATE", "APPLE", "ABOUT", "ABOVE", "ABUSE", "ACTOR", "ACUTE", "ADMIT", "ADOPT", "ADULT", "AGENT",
     "AGREE", "AHEAD", "ALARM", "ALBUM", "ALERT", "ALIKE", "ALIVE", "ALLOW", "ALONE", "ALONG",
     "ANGRY", "APART", "ARENA", "ARGUE", "ARISE", "AVOID", "AWARD", "BEACH", "BEGAN", "BEGIN",
     "BEING", "BELOW", "BIRTH", "BLACK", "BLAME", "BLANK", "BLIND", "BLOCK", "BLOOD", "BOARD",

@@ -7,7 +7,7 @@
 
 const DICTIONARY: Set<string> = new Set([
   // Common 5-letter words
-  'APPLE', 'ABOUT', 'ABOVE', 'ABUSE', 'ACTOR',
+  'ABATE', 'APPLE', 'ABOUT', 'ABOVE', 'ABUSE', 'ACTOR',
   'ACUTE', 'ADMIT', 'ADOPT', 'ADULT', 'AGENT',
   'AGREE', 'AHEAD', 'ALARM', 'ALBUM', 'ALERT',
   'ALIKE', 'ALIVE', 'ALLOW', 'ALONE', 'ALONG',
