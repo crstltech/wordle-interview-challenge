@@ -7,77 +7,64 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
- * Demo — shows the three bugs in action.
+ * Demo — exercises the WordleService so you can observe its behaviour.
  *
  * Run with: mvn exec:java -Dexec.mainClass=wordle.Demo
  */
 public class Demo {
 
     public static void main(String[] args) throws Exception {
-        System.out.println("=== Wordle Service Bug Demo ===\n");
+        System.out.println("=== Wordle Service Demo ===\n");
 
-        demoLetterCodingBug();
-        demoValidationBug();
-        demoConcurrencyBug();
+        demoLetterCoding();
+        demoValidation();
+        demoConcurrency();
     }
 
-    private static void demoLetterCodingBug() {
-        System.out.println("--- Bug 1: Duplicate Letter Algorithm ---");
+    private static void demoLetterCoding() {
+        System.out.println("--- Duplicate Letters ---");
         WordleService service = new WordleService();
-
-        // PAPER has one P (at index 2). APPLE has two P's (indices 1 and 2).
-        // Correct: A=YELLOW, P=YELLOW, P=GREEN, L=GREY, E=YELLOW
-        // Buggy:   A=YELLOW, P=YELLOW, P=GREEN, L=GREY, E=YELLOW  ← often fine
-        // But with CRANE / ABATE:
-        //   CRANE has one A (index 2). ABATE has two A's (indices 0 and 2).
-        //   Correct: A=GREY, B=GREY, A=GREEN, T=GREY, E=GREEN
-        //   Buggy:   A=YELLOW, B=GREY, A=GREEN, T=GREY, E=GREEN  ← wrong first A
 
         String gameId = service.startGame(GameOptions.withAnswer("CRANE"));
         try {
             GuessResult result = service.submitGuess(gameId, "ABATE");
             System.out.print("  ABATE vs CRANE: ");
             printCodes(result.codes());
-            System.out.println("  Expected: [GREY, GREY, GREEN, GREY, GREEN]");
             System.out.println();
         } catch (Exception e) {
             System.out.println("  Error: " + e.getMessage());
         }
     }
 
-    private static void demoValidationBug() {
-        System.out.println("--- Bug 2: Missing Input Validation ---");
+    private static void demoValidation() {
+        System.out.println("--- Input Validation ---");
         WordleService service = new WordleService();
 
         String gameId = service.startGame(GameOptions.withAnswer("REACT"));
         try {
-            // Should throw ValidationException for wrong length
             GuessResult result = service.submitGuess(gameId, "HI");
-            System.out.println("  Accepted 2-letter guess 'HI' — should have rejected it!");
-            System.out.println("  codes: " + result.codes());
+            System.out.println("  2-letter guess 'HI' accepted, codes: " + result.codes());
         } catch (ValidationException e) {
-            System.out.println("  Correctly rejected: " + e.getMessage());
+            System.out.println("  'HI' rejected: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("  Wrong exception type: " + e.getClass().getSimpleName());
+            System.out.println("  'HI' raised: " + e.getClass().getSimpleName());
         }
 
         try {
-            // Should throw ValidationException for non-dictionary word
-            GuessResult result = service.submitGuess(gameId, "XXXXX");
-            System.out.println("  Accepted non-word 'XXXXX' — should have rejected it!");
+            service.submitGuess(gameId, "XXXXX");
+            System.out.println("  Non-word 'XXXXX' accepted");
         } catch (ValidationException e) {
-            System.out.println("  Correctly rejected: " + e.getMessage());
+            System.out.println("  'XXXXX' rejected: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("  Wrong exception type: " + e.getClass().getSimpleName());
+            System.out.println("  'XXXXX' raised: " + e.getClass().getSimpleName());
         }
         System.out.println();
     }
 
-    private static void demoConcurrencyBug() throws Exception {
-        System.out.println("--- Bug 3: Concurrency Race Condition ---");
+    private static void demoConcurrency() throws Exception {
+        System.out.println("--- Concurrent Submissions ---");
         WordleService service = new WordleService();
 
-        // maxGuesses=2, but 5 concurrent requests — all may succeed due to the race
         String gameId = service.startGame(GameOptions.withAnswer("REACT", 2));
 
         ExecutorService executor = Executors.newFixedThreadPool(5);

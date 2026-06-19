@@ -29,25 +29,8 @@ public class WordleSolver {
      * @return the next guess that maximises information gain
      */
     public String getNextGuess(List<GuessAttempt> previousGuesses, List<String> possibleWords) {
-        // TODO: Implement your solver logic here
-        //
-        // Suggested approach:
-        // 1. If no previous guesses, return a good starting word
-        //
-        // 2. Filter possibleWords based on previous results:
-        //    - GREEN: letter must be at that position
-        //    - YELLOW: letter must exist but NOT at that position
-        //    - GREY: letter must not exist (unless accounted for by GREEN/YELLOW)
-        //
-        // 3. If only 1–2 words remain, guess one directly.
-        //
-        // 4. Otherwise, calculate information entropy for each candidate:
-        //    - For each candidate guess, simulate the result against every possible answer
-        //    - Group answers by result pattern and count partition sizes
-        //    - Choose the guess that minimises expected remaining possibilities
-        //
-        // Advanced: letter-frequency weighting, positional frequency analysis,
-        //           pre-computed first-guess entropy table.
+        // TODO: Implement your solver logic here.
+        // Return the next guess given the previous guesses and the current candidates.
 
         throw new UnsupportedOperationException("Not implemented");
     }

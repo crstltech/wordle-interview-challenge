@@ -34,28 +34,9 @@ class WordleSolver:
         possible_words: Optional[list[str]] = None,
     ) -> str:
         """
-        Get the next optimal guess based on previous results.
+        Get the next guess based on the previous guesses and their results.
 
         TODO: Implement your solver logic here.
-
-        Suggested approach:
-        1. If no previous guesses, return a good starting word
-           - Calculate the word with highest expected information gain
-
-        2. Filter possible words based on previous results
-           - Narrow down the word list using the constraints from previous guesses
-
-        3. If only 1-2 possible words remain, just guess one
-
-        4. Otherwise, calculate information entropy for each possible guess
-           - For each candidate word, simulate guessing it against all possible answers
-           - Calculate the expected number of remaining possibilities
-           - Choose the guess that minimizes this (maximizes information gain)
-
-        Advanced optimization:
-        - Use letter frequency analysis
-        - Consider positional frequency
-        - Pre-compute common patterns
         """
         raise NotImplementedError("Implement your solver here")
 
@@ -66,37 +47,17 @@ class WordleSolver:
         result: list[LetterCode],
     ) -> list[str]:
         """
-        Filter word list based on guess results.
+        Return only the words consistent with the given guess result.
 
         TODO: Implement filtering logic.
-
-        For each word in the list, check if it's consistent with the guess result:
-        - GREEN: Letter must be in same position
-        - YELLOW: Letter must exist but NOT in this position
-        - GREY: Letter must not exist (unless accounted for by GREEN/YELLOW)
-
-        Handle duplicate letters carefully!
         """
         ...
 
     def _calculate_entropy(self, guess: str, possible_words: list[str]) -> float:
         """
-        Calculate information entropy for a guess.
+        Score this guess against the current candidate words.
 
-        Information theory approach:
-        - For a given guess, calculate how many words would remain for each possible result pattern
-        - The "best" guess is the one that, on average, leaves the fewest possibilities
-
-        TODO: Implement entropy calculation.
-
-        1. For each possible answer in possible_words:
-           - Simulate what result pattern you'd get if this was the answer
-           - Group answers by their result pattern
-
-        2. Calculate expected value:
-           E = sum(probability of pattern * remaining words for that pattern)
-
-        3. Return E (lower means more information gained)
+        TODO: Implement your scoring logic.
         """
         ...
 

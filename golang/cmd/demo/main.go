@@ -36,13 +36,12 @@ func main() {
 	svc := internal.NewWordleService(dict)
 
 	// -----------------------------------------------------------------------
-	// Scenario 1: Duplicate letter handling (shows Bug 1 in action)
+	// Scenario 1: Duplicate letter handling
 	// -----------------------------------------------------------------------
 	fmt.Println("=== Scenario 1: Duplicate Letters ===")
 	fmt.Println()
 
 	fmt.Println("Game: answer=PAPER, guess=APPLE")
-	fmt.Println("Expected: [Y][Y][G][_][Y]  (buggy impl gives too many YELLOWs)")
 	gameID := svc.StartGame(internal.GameOptions{Answer: "PAPER"})
 	result, err := svc.SubmitGuess(gameID, "APPLE")
 	if err != nil {
@@ -53,7 +52,6 @@ func main() {
 	fmt.Println()
 
 	fmt.Println("Game: answer=SHEEP, guess=CREEP")
-	fmt.Println("Expected: [_][_][G][G][G]  (buggy impl colours first E yellow)")
 	gameID = svc.StartGame(internal.GameOptions{Answer: "SHEEP"})
 	result, err = svc.SubmitGuess(gameID, "CREEP")
 	if err != nil {
@@ -64,38 +62,37 @@ func main() {
 	fmt.Println()
 
 	// -----------------------------------------------------------------------
-	// Scenario 2: Validation (shows Bug 2 in action)
+	// Scenario 2: Validation
 	// -----------------------------------------------------------------------
 	fmt.Println("=== Scenario 2: Validation ===")
 	fmt.Println()
 
 	gameID = svc.StartGame(internal.GameOptions{Answer: "REACT"})
 
-	fmt.Println("Guess: 'HI' (wrong length — should return ValidationError)")
+	fmt.Println("Guess: 'HI' (wrong length)")
 	_, err = svc.SubmitGuess(gameID, "HI")
 	if err != nil {
 		fmt.Printf("  Got error: %v\n", err)
 	} else {
-		fmt.Println("  BUG: no error returned for wrong-length guess!")
+		fmt.Println("  Accepted (no error returned)")
 	}
 	fmt.Println()
 
-	fmt.Println("Guess: 'XXXXX' (not in dictionary — should return ValidationError)")
+	fmt.Println("Guess: 'XXXXX' (not in dictionary)")
 	_, err = svc.SubmitGuess(gameID, "XXXXX")
 	if err != nil {
 		fmt.Printf("  Got error: %v\n", err)
 	} else {
-		fmt.Println("  BUG: no error returned for non-dictionary word!")
+		fmt.Println("  Accepted (no error returned)")
 	}
 	fmt.Println()
 
 	// -----------------------------------------------------------------------
-	// Scenario 3: Concurrency race condition (shows Bug 3 in action)
+	// Scenario 3: Concurrency
 	// -----------------------------------------------------------------------
-	fmt.Println("=== Scenario 3: Concurrency Race Condition ===")
+	fmt.Println("=== Scenario 3: Concurrent Submissions ===")
 	fmt.Println()
 	fmt.Println("5 goroutines submit guesses to a maxGuesses=2 game simultaneously.")
-	fmt.Println("A correct implementation allows at most 2 successes.")
 	fmt.Println()
 
 	gameID = svc.StartGame(internal.GameOptions{Answer: "REACT", MaxGuesses: 2})
@@ -126,14 +123,7 @@ func main() {
 
 	game, _ := svc.GetGame(gameID)
 	fmt.Println()
-	fmt.Printf("  Successes: %d (expected ≤2)\n", successes)
+	fmt.Printf("  Successes: %d (MaxGuesses is 2)\n", successes)
 	fmt.Printf("  Errors:    %d\n", errors)
-	fmt.Printf("  game.Guesses length: %d (should be ≤2)\n", len(game.Guesses))
-	if successes > 2 || len(game.Guesses) > 2 {
-		fmt.Println()
-		fmt.Println("  BUG CONFIRMED: race condition allowed more guesses than MaxGuesses!")
-	} else {
-		fmt.Println()
-		fmt.Println("  (Race condition may not have fired — try running again.)")
-	}
+	fmt.Printf("  game.Guesses length: %d\n", len(game.Guesses))
 }
