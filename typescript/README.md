@@ -60,13 +60,8 @@ Fix the bugs in `src/WordleService.ts`. Your job:
 ## What We're Looking For
 
 - Can you quickly diagnose issues from test output?
-- Do you understand the Wordle duplicate-letter algorithm?
-- Can you spot race conditions and concurrency bugs?
-
-## Hints
-
-- The demo script (`npm run demo`) shows the bugs visually
-- Read the test descriptions carefully — they reveal expected behavior
+- Can you reason about correctness and edge cases from the failing tests?
+- Are your fixes clean and well-justified?
 
 ## Wordle Rules Reference
 
@@ -203,8 +198,8 @@ The `DictionaryService` provides:
 | Criteria | Weight |
 |----------|--------|
 | Identifies root causes correctly | 15% |
-| Fixes duplicate letter algorithm | 15% |
-| Handles concurrency properly | 10% |
+| Fixes the bugs correctly | 15% |
+| Robust handling of edge cases | 10% |
 
 ### Phase 2 (60%)
 | Criteria | Weight |

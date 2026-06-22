@@ -45,8 +45,8 @@ You won't finish everything. We want to see how you prioritize and communicate t
 | Criteria | Weight |
 |----------|--------|
 | Identifies root causes correctly | 15% |
-| Fixes duplicate letter algorithm | 15% |
-| Handles concurrency properly | 10% |
+| Fixes the bugs correctly | 15% |
+| Robust handling of edge cases | 10% |
 
 ### Phase 2 (60%)
 | Criteria | Weight |

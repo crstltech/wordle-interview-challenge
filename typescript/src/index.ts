@@ -2,8 +2,8 @@ import { WordleService } from './WordleService';
 import { LetterCode } from './types';
 
 /**
- * Demo script showing the bugs in the WordleService
- * 
+ * Demo script that exercises the WordleService so you can observe its behaviour.
+ *
  * Run with: npm run demo
  */
 
@@ -33,12 +33,9 @@ async function demonstrateDuplicateLetters() {
   
   console.log('\nAnswer: PAPER');
   console.log('Guess:  APPLE');
-  console.log('\nActual result:');
+  console.log('\nResult:');
   console.log(formatResult(result.guess, result.codes));
 
-  console.log('\nExpected result (per Wordle rules):');
-  console.log('A:🟨 P:🟨 P:🟩 L:⬜ E:🟨');
-  
   // Another test case
   console.log('\n' + '-'.repeat(40));
   
@@ -47,11 +44,8 @@ async function demonstrateDuplicateLetters() {
   
   console.log('\nAnswer: SHEEP');
   console.log('Guess:  CREEP');
-  console.log('\nActual result:');
+  console.log('\nResult:');
   console.log(formatResult(result2.guess, result2.codes));
-
-  console.log('\nExpected result (per Wordle rules):');
-  console.log('C:⬜ R:⬜ E:🟩 E:🟩 P:🟩');
 }
 
 async function demonstrateValidation() {

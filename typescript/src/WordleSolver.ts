@@ -38,26 +38,8 @@ export class WordleSolver {
     previousGuesses: GuessResult[],
     possibleWords?: string[]
   ): string {
-    // TODO: Implement your solver logic here
-    //
-    // Suggested approach:
-    // 1. If no previous guesses, return a good starting word
-    //    - Calculate the word with highest expected information gain
-    //
-    // 2. Filter possible words based on previous results
-    //    - Narrow down the word list using the constraints from previous guesses
-    //
-    // 3. If only 1-2 possible words remain, just guess one
-    //
-    // 4. Otherwise, calculate information entropy for each possible guess
-    //    - For each candidate word, simulate guessing it against all possible answers
-    //    - Calculate the expected number of remaining possibilities
-    //    - Choose the guess that minimizes this (maximizes information gain)
-    //
-    // Advanced optimization:
-    // - Use letter frequency analysis
-    // - Consider positional frequency
-    // - Pre-compute common patterns
+    // TODO: Implement your solver logic here.
+    // Return the next guess given the previous guesses and their results.
 
     throw new Error('Not implemented');
   }
@@ -75,14 +57,7 @@ export class WordleSolver {
     guess: string,
     result: LetterCode[]
   ): string[] {
-    // TODO: Implement filtering logic
-    //
-    // For each word in the list, check if it's consistent with the guess result:
-    // - GREEN: Letter must be in same position
-    // - YELLOW: Letter must exist but NOT in this position
-    // - GREY: Letter must not exist (unless accounted for by GREEN/YELLOW)
-    //
-    // Handle duplicate letters carefully!
+    // TODO: Return only the words consistent with the given guess result.
 
     throw new Error('Not implemented');
   }
@@ -99,16 +74,7 @@ export class WordleSolver {
    * @returns Expected information gain (lower is better)
    */
   private calculateEntropy(guess: string, possibleWords: string[]): number {
-    // TODO: Implement entropy calculation
-    //
-    // 1. For each possible answer in possibleWords:
-    //    - Simulate what result pattern you'd get if this was the answer
-    //    - Group answers by their result pattern
-    //
-    // 2. Calculate expected value:
-    //    E = Σ (probability of pattern × remaining words for that pattern)
-    //
-    // 3. Return E (lower means more information gained)
+    // TODO: Score this guess against the current candidate words.
 
     throw new Error('Not implemented');
   }

@@ -1,5 +1,5 @@
 """
-Demo script showing the bugs in the WordleService.
+Demo script that exercises the WordleService so you can observe its behaviour.
 
 Run with: python demo.py
 """
@@ -41,10 +41,8 @@ async def demonstrate_duplicate_letters() -> None:
 
     print("\nAnswer: PAPER")
     print("Guess:  APPLE")
-    print("\nActual result:")
+    print("\nResult:")
     print(format_result(result.guess, result.codes))
-    print("\nExpected result (per Wordle rules):")
-    print("A:[Y] P:[Y] P:[G] L:[ ] E:[Y]")
 
     # Test case 2: Answer is SHEEP, guess is CREEP
     print("\n" + "-" * 40)
@@ -54,10 +52,8 @@ async def demonstrate_duplicate_letters() -> None:
 
     print("\nAnswer: SHEEP")
     print("Guess:  CREEP")
-    print("\nActual result:")
+    print("\nResult:")
     print(format_result(result2.guess, result2.codes))
-    print("\nExpected result (per Wordle rules):")
-    print("C:[ ] R:[ ] E:[G] E:[G] P:[G]")
 
 
 async def demonstrate_validation() -> None:
@@ -118,12 +114,7 @@ async def demonstrate_concurrency() -> None:
 
     game = service.get_game(game_id)
     print(f"\nFinal game state: {len(game.guesses)} guesses recorded")
-    print("Expected: Maximum 2 guesses")
-
-    if len(game.guesses) > 2:
-        print(f"  BUG DEMONSTRATED: {len(game.guesses)} guesses recorded (exceeds max of 2)")
-    else:
-        print("  (Race condition may not have triggered this run — try again)")
+    print("Max guesses: 2")
 
 
 async def main() -> None:
